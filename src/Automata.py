@@ -1,12 +1,12 @@
 from __future__ import annotations
 from typing import List
-from Graph import Graph
+from src.Graph import Graph
 
 
 class Automata:
     EPSILON_LABEL = '__EPSILON__'
 
-    def __int__(self):
+    def __init__(self):
         self.__graph = Graph()
         self.begin_state = None
         self.end_state = None

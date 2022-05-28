@@ -3,7 +3,7 @@ from typing import List
 
 
 class Graph:
-    def __int__(self):
+    def __init__(self):
         self.__data = {}
 
     def add_vertex(self, vertex_id: int) -> bool:
@@ -32,7 +32,8 @@ class Graph:
             for v in g.__data.keys():
                 new_g.add_vertex(v)
 
+        for g in graphs:
+            for v in g.__data.keys():
                 for e in g.__data[v]:
                     new_g.add_edge(v, e[0], e[1])
-
         return new_g

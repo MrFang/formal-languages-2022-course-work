@@ -1,29 +1,24 @@
-from ASTNode import ASTNode, ASTNodeType
-from Automata import Automata
-
-
-def id_generator() -> int:
-    _id = 0
-
-    while True:
-        yield _id
-        _id += 1
+from src.ASTNode import ASTNode, ASTNodeType
+from src.Automata import Automata
+from src.IdGenerator import IdGenerator
 
 
 def traverse_ast(tree: ASTNode) -> Automata:
     automatons = [traverse_ast(child) for child in tree.children]
+    gen = IdGenerator.instance()
 
     if tree.node_type == ASTNodeType.PRIMITIVE:
         assert len(automatons) == 0
 
         auto = Automata()
-        new_id = id_generator()
+        new_id = next(gen)
         auto.add_state(new_id)
         auto.begin_state = new_id
 
         for char in tree.data:
             last_id = new_id
-            new_id = id_generator()
+            new_id = next(gen)
+            auto.add_state(new_id)
             auto.add_edge(last_id, new_id, char)
 
         auto.end_state = new_id
@@ -36,8 +31,8 @@ def traverse_ast(tree: ASTNode) -> Automata:
         assert len(automatons) == 1
 
         auto = automatons[0]
-        start_id = id_generator()
-        end_id = id_generator()
+        start_id = next(gen)
+        end_id = next(gen)
 
         auto.add_state(start_id)
         auto.add_edge(start_id, auto.begin_state, Automata.EPSILON_LABEL)
@@ -50,8 +45,8 @@ def traverse_ast(tree: ASTNode) -> Automata:
         assert len(automatons) == 1
 
         auto = automatons[0]
-        start_id = id_generator()
-        end_id = id_generator()
+        start_id = next(gen)
+        end_id = next(gen)
 
         auto.add_state(start_id)
         auto.add_edge(start_id, auto.begin_state, Automata.EPSILON_LABEL)
@@ -61,6 +56,6 @@ def traverse_ast(tree: ASTNode) -> Automata:
 
         return auto
     elif tree.node_type == ASTNodeType.ALTERNATIVE:
-        new_begin = id_generator()
-        new_end = id_generator()
+        new_begin = next(gen)
+        new_end = next(gen)
         return Automata.merge_automatons(automatons, new_begin, new_end)

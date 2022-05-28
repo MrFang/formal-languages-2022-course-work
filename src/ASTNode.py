@@ -12,7 +12,7 @@ class ASTNodeType(Enum):
 
 
 class ASTNode:
-    def __int__(self, node_type: ASTNodeType, children: List[ASTNode] = [], data=''):
+    def __init__(self, node_type: ASTNodeType, children: List[ASTNode] = [], data=''):
         self.children = children
         self.node_type = node_type
         self.data = data
