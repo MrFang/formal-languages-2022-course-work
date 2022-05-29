@@ -1,6 +1,8 @@
 from __future__ import annotations
 from typing import List
 from src.Graph import Graph
+import networkx as nx
+import matplotlib.pyplot as plt
 
 
 class Automata:
@@ -36,3 +38,10 @@ class Automata:
             new_automata.add_edge(s, new_end_state, Automata.EPSILON_LABEL)
 
         return new_automata
+
+    def visualise(self):
+        g = nx.MultiDiGraph()
+        g.add_nodes_from(self.__graph.vertexes())
+        g.add_edges_from(self.__graph.edges())
+        nx.draw(g)
+        plt.show()

@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import List
+from typing import List, Tuple
 
 
 class Graph:
@@ -23,6 +23,17 @@ class Graph:
 
         self.__data[from_id].append((to_id, label))
         return True
+
+    def vertexes(self) -> List[int]:
+        return list(self.__data.keys())
+
+    def edges(self) -> List[Tuple[int, int]]:
+        es = []
+
+        for f, l in self.__data.items():
+            es += [(f, t) for t, _ in l]
+
+        return es
 
     @staticmethod
     def merge_graphs(graphs: List[Graph]) -> Graph:
