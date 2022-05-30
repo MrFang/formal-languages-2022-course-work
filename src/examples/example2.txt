@@ -1,0 +1,6 @@
+// Example 2
+S : ((A|B)|C)|D
+A : string
+B : (string)+((string)*)+
+C : A(A|C)*D
+D : BB(b+)*
