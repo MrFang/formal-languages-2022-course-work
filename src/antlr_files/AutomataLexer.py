@@ -50,7 +50,7 @@ class AutomataLexer(Lexer):
     STAR = 7
     MAYBE = 8
     ALTERANTIVE = 9
-    NEW_LINE = 10
+    EOL = 10
     WS = 11
 
     channelNames = [ u"DEFAULT_TOKEN_CHANNEL", u"HIDDEN" ]
@@ -62,10 +62,10 @@ class AutomataLexer(Lexer):
 
     symbolicNames = [ "<INVALID>",
             "STRING", "COMMENT", "CS", "COLON", "LEFT_PARENTHESIS", "RIGHT_PARENTHESIS", 
-            "STAR", "MAYBE", "ALTERANTIVE", "NEW_LINE", "WS" ]
+            "STAR", "MAYBE", "ALTERANTIVE", "EOL", "WS" ]
 
     ruleNames = [ "STRING", "COMMENT", "CS", "COLON", "LEFT_PARENTHESIS", 
-                  "RIGHT_PARENTHESIS", "STAR", "MAYBE", "ALTERANTIVE", "NEW_LINE", 
+                  "RIGHT_PARENTHESIS", "STAR", "MAYBE", "ALTERANTIVE", "EOL", 
                   "WS" ]
 
     grammarFileName = "Automata.g4"

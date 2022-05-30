@@ -9,7 +9,7 @@ comment:
 
 rule:
     non_terminal_name COLON expr EOF |
-    non_terminal_name COLON expr NEW_LINE;
+    non_terminal_name COLON expr EOL;
 
 expr:
     non_alternative | alternative;
@@ -51,5 +51,5 @@ RIGHT_PARENTHESIS   : ')';
 STAR                : '*';
 MAYBE               : '?';
 ALTERANTIVE         : '|';
-NEW_LINE            : '\n';
+EOL                 : '\n';
 WS                  : [\t\r ]+ -> skip;     // Spaces and tabs outside string (double quotes) are ignored
