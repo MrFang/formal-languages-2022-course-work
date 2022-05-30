@@ -36,7 +36,7 @@ simple_expr:
     CS | STRING;
 
 non_terminal_name:
-    CS | CS non_terminal_name;
+    CS+;
 
 
 // String of terminal ASCII symbols. Double quote should be used with escape symbol \
