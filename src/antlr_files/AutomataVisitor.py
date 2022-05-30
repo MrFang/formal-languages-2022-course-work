@@ -19,13 +19,13 @@ class AutomataVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by AutomataParser#rule.
-    def visitRule(self, ctx:AutomataParser.RuleContext):
+    # Visit a parse tree produced by AutomataParser#comment.
+    def visitComment(self, ctx:AutomataParser.CommentContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by AutomataParser#comment.
-    def visitComment(self, ctx:AutomataParser.CommentContext):
+    # Visit a parse tree produced by AutomataParser#rule.
+    def visitRule(self, ctx:AutomataParser.RuleContext):
         return self.visitChildren(ctx)
 
 
@@ -49,11 +49,6 @@ class AutomataVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by AutomataParser#plus.
-    def visitPlus(self, ctx:AutomataParser.PlusContext):
-        return self.visitChildren(ctx)
-
-
     # Visit a parse tree produced by AutomataParser#star.
     def visitStar(self, ctx:AutomataParser.StarContext):
         return self.visitChildren(ctx)
@@ -69,8 +64,8 @@ class AutomataVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by AutomataParser#symbol.
-    def visitSymbol(self, ctx:AutomataParser.SymbolContext):
+    # Visit a parse tree produced by AutomataParser#non_terminal_name.
+    def visitNon_terminal_name(self, ctx:AutomataParser.Non_terminal_nameContext):
         return self.visitChildren(ctx)
 
 

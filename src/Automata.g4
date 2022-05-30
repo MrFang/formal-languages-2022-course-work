@@ -4,44 +4,52 @@ s: line*;
 
 line: rule | comment;
 
-rule:
-    LS ':' expr '\n';
-
 comment:
-    '//' simple_expr? '\n';
+    COMMENT;
+
+rule:
+    non_terminal_name COLON expr EOF |
+    non_terminal_name COLON expr NEW_LINE;
 
 expr:
     non_alternative | alternative;
 
 alternative:
-    non_alternative '|' expr;
+    non_alternative ALTERANTIVE expr;
 
 non_alternative:
-    plus non_alternative | plus |
-    star non_alternative | star |
-    maybe non_alternative | maybe |
-    parentheses non_alternative | parentheses |
-    simple_expr non_alternative | simple_expr;
+    star | star non_alternative |
+    maybe | maybe non_alternative |
+    parentheses | parentheses non_alternative |
+    simple_expr | simple_expr non_alternative;
 
 parentheses:
-    '(' expr ')';
-
-plus:
-    parentheses '+' | symbol '+';
+    LEFT_PARENTHESIS expr RIGHT_PARENTHESIS;
 
 star:
-    parentheses '*' | symbol '*';
+    parentheses STAR | simple_expr STAR;
 
 maybe:
-    parentheses '?' | symbol '?';
+    parentheses MAYBE | simple_expr MAYBE;
 
 simple_expr:
-    symbol | symbol simple_expr;
+    CS | STRING;
 
-symbol:
-    LS | SS;
+non_terminal_name:
+    CS | CS non_terminal_name;
 
 
-LS      : [A-Z];
-SS      : [a-z0-9];
-WS      : [\t\r ]+ -> skip;
+// String of terminal ASCII symbols. Double quote should be used with escape symbol \
+STRING      : '"' ('\\"' | [ !#-~])+ '"';
+// Comment line
+COMMENT     : '//' [ -~]* '\n';
+
+CS                  : [A-Z];                // Capital symbols for non-terminal names
+COLON               : ':';
+LEFT_PARENTHESIS    : '(';
+RIGHT_PARENTHESIS   : ')';
+STAR                : '*';
+MAYBE               : '?';
+ALTERANTIVE         : '|';
+NEW_LINE            : '\n';
+WS                  : [\t\r ]+ -> skip;     // Spaces and tabs outside string (double quotes) are ignored

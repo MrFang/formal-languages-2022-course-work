@@ -1,6 +1,6 @@
 // Example 2
 S : ((A|B)|C)|D
-A : string
-B : (string)+((string)*)+
+A : "string"
+B : ("string")(C*)*
 C : A(A|C)*D
-D : BB(b+)*
+D : BB("'b'"*)*
