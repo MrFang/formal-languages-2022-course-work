@@ -86,8 +86,9 @@ B : A | "abc"?
 ## ANTLR compilation
 
 For obtaining parser and visitor, one should execute following command in the terminal:
-```
-antlr4 -Dlanguage=Python3 Automata.g4 -visitor -o antlr_files
+```sh
+$ cd src
+$ antlr4 -Dlanguage=Python3 Automata.g4 -visitor -o antlr_files
 ```
 
 This command run `antlr4`, which would generate parser and visitor in `antlr_files` folder.
