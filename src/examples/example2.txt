@@ -1,6 +1,9 @@
 // Example 2
-S : ((A|B)|C)|D
-A : "string"
-B : ("string")(C*)*
-C : A(A|C)*D
-D : BB("'b'"*)*
+A : A | (B "cats")* | (B "cats")?
+B : ((("cats"?)*)?)* | (((A?)*)?)*
+C : "long string with spaces"
+D : "string containing \"escaped double quotes\""
+E : "Some other ASCII symbols !@#$%^&*()+?/\<>"
+F : "A | B"
+G : "A?" | A?
+H : "A*" | A*

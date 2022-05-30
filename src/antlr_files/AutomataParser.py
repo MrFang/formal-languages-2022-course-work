@@ -59,7 +59,7 @@ class AutomataParser ( Parser ):
 
     symbolicNames = [ "<INVALID>", "STRING", "COMMENT", "CS", "COLON", "LEFT_PARENTHESIS", 
                       "RIGHT_PARENTHESIS", "STAR", "MAYBE", "ALTERANTIVE", 
-                      "NEW_LINE", "WS" ]
+                      "EOL", "WS" ]
 
     RULE_s = 0
     RULE_line = 1
@@ -88,7 +88,7 @@ class AutomataParser ( Parser ):
     STAR=7
     MAYBE=8
     ALTERANTIVE=9
-    NEW_LINE=10
+    EOL=10
     WS=11
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
@@ -293,8 +293,8 @@ class AutomataParser ( Parser ):
         def EOF(self):
             return self.getToken(AutomataParser.EOF, 0)
 
-        def NEW_LINE(self):
-            return self.getToken(AutomataParser.NEW_LINE, 0)
+        def EOL(self):
+            return self.getToken(AutomataParser.EOL, 0)
 
         def getRuleIndex(self):
             return AutomataParser.RULE_rule
@@ -345,7 +345,7 @@ class AutomataParser ( Parser ):
                 self.state = 43
                 self.expr()
                 self.state = 44
-                self.match(AutomataParser.NEW_LINE)
+                self.match(AutomataParser.EOL)
                 pass
 
 

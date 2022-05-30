@@ -1,1 +1,7 @@
-S : " abd \" cats \" ""cbdg"
+// Example 3
+AB : ((A | B) | C) | D
+BC : (A | "cats" | B) | ("cats"* | B?)*
+CD : (((A)))
+DE : ABCD?ABCD
+EF : (A)(B)(C)"cats"(D)(E)(F)
+FG : (A)* (B?) (C*) "cats"* (D?) (E*) (F?)
