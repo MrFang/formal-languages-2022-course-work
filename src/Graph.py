@@ -1,10 +1,10 @@
 from __future__ import annotations
-from typing import List, Tuple
+from typing import List, Tuple, Dict
 
 
 class Graph:
     def __init__(self):
-        self.__data = {}
+        self.__data: Dict[int, List[Tuple[int, str]]] = {}
 
     def add_vertex(self, vertex_id: int) -> bool:
         if self.__data.get(vertex_id) is not None:
@@ -27,11 +27,12 @@ class Graph:
     def vertexes(self) -> List[int]:
         return list(self.__data.keys())
 
-    def edges(self) -> List[Tuple[int, int]]:
-        es = []
+    def edges(self) -> Dict[Tuple[int, int], str]:
+        es = {}
 
-        for f, l in self.__data.items():
-            es += [(f, t) for t, _ in l]
+        for f, lst in self.__data.items():
+            for t, l in lst:
+                es[(f, t)] = l
 
         return es
 
