@@ -1,0 +1,11 @@
+// Example 1
+// Notice, that spaces outside quotes are ignored
+A : AB* | (AB)* | AB* (AB)*
+B : AB? | (AB)? | AB? (AB)?
+C : A* B* C
+D : A? B? C
+E : "cats"* | "cats"?
+F : "cats" "dogs"
+G : "cats" | "dogs"
+H : "c"? "a"* "t"? "s"*
+I : ("cats"*) A? | ((A?) B*)*

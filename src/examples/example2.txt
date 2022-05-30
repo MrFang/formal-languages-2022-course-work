@@ -1,0 +1,9 @@
+// Example 2
+A : A | (B "cats")* | (B "cats")?
+B : ((("cats"?)*)?)* | (((A?)*)?)*
+C : "long string with spaces"
+D : "string containing \"escaped double quotes\""
+E : "Some other ASCII symbols !@#$%^&*()+?/\<>"
+F : "A | B"
+G : "A?" | A?
+H : "A*" | A*
