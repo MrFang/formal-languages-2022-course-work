@@ -5,6 +5,7 @@ from matplotlib.lines import Line2D
 from src.Graph import Graph
 import networkx as nx
 import matplotlib.pyplot as plt
+import os
 
 
 class Automata:
@@ -64,7 +65,7 @@ class Automata:
 
         return new_automata
 
-    def visualise(self):
+    def visualise(self, folder="results"):
         vertexes = self.__graph.vertexes()
         edges = {
             k: v if v != Automata.EPSILON_LABEL else chr(949)
@@ -81,10 +82,10 @@ class Automata:
             (vertexes.index(self.begin_state), vertexes.index(self.end_state))
 
         colors = [
-            1 if idx == begin_state_idx
-            else 0.7 if idx == end_state_idx
-            else 0.4
-            for idx in range(len(vertexes))
+            'cyan' if (idx == begin_state_idx) and (idx == end_state_idx) else
+            'yellow' if (idx == begin_state_idx) else
+            'orange' if idx == end_state_idx else
+            'magenta' for idx in range(len(vertexes))
         ]
 
         radius = 0.2
@@ -101,15 +102,24 @@ class Automata:
         Automata.__draw_labels(g, pos=position, edge_labels=edges, rad=radius)
 
         legend_elements = [
-            Line2D([0], [0], marker='o', color='green', label='Желтый - начальное состояние',
-                   markerfacecolor='yellow', markersize=13),
-            Line2D([0], [0], marker='o', color='green', label='Красный - терминальное состояние',
-                   markerfacecolor='red', markersize=13),
-            Line2D([0], [0], marker='o', color='green', label='Розовый - остальные состояния',
-                   markerfacecolor='magenta', markersize=13)
+            Line2D([0], [0], marker='o', label='Начальное + терминальное',
+                   markerfacecolor='cyan', markeredgecolor='black', markersize=13),
+            Line2D([0], [0], marker='o', label='Начальное состояние',
+                   markerfacecolor='yellow', markeredgecolor='black', markersize=13),
+            Line2D([0], [0], marker='o', label='Терминальное состояние',
+                   markerfacecolor='orange', markeredgecolor='black', markersize=13),
+            Line2D([0], [0], marker='o', label='Остальные состояния',
+                   markerfacecolor='magenta', markeredgecolor='black', markersize=13)
         ]
+
         plt.legend(handles=legend_elements)
-        plt.savefig(f'auto_{self.begin_state}.png', dpi=100)
+
+        # Create a new directory, if it doesn't exist
+        if not os.path.exists(folder):
+            os.makedirs(folder)
+
+        # Save figure
+        plt.savefig(os.path.join(folder, f'auto_{self.begin_state}.png'), dpi=100)
 
     @staticmethod
     def __draw_labels(g, pos, edge_labels=None, label_pos=0.5, font_size=10, font_color="k",

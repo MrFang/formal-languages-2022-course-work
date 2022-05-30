@@ -1,4 +1,4 @@
-// Example 2
+// Example 5
 A : A | (B "cats")* | (B "cats")?
 B : ((("cats"?)*)?)* | (((A?)*)?)*
 C : "long string with spaces"

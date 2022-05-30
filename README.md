@@ -75,6 +75,10 @@ Example:
 // Comment string
 ```
 
+## Visualization of the syntax:
+
+![](./scheme/scheme.svg)
+
 ## Example of file format
 
 ```
@@ -83,16 +87,32 @@ A : "abc"
 B : A | "abc"?
 ```
 
-## ANTLR compilation
+## Run
 
-For obtaining parser and visitor, one should execute following command in the terminal:
+For running current project with specific EBNF grammar stored in `<path_to_file>`,
+one has to follow these steps:
+
+1. Compile ANTLR:
+    ```sh
+    $ cd src
+    $ antlr4 -Dlanguage=Python3 Automata.g4 -visitor -o antlr_files
+    ```
+2. Execute command:
+    ```sh
+    $ PYTHONPATH='.' python3 src/main.py <path_to_file>
+    ```
+
+Images, corresponding to obtained automata, by default will be placed in `results` folder.
+
+Example:
 ```sh
-$ cd src
-$ antlr4 -Dlanguage=Python3 Automata.g4 -visitor -o antlr_files
+$ PYTHONPATH='.' python3 src/main.py examples/1.txt
 ```
 
-This command run `antlr4`, which would generate parser and visitor in `antlr_files` folder.
-These files can be imported and used in your code.
+## Notes about ANTLR compilation
+
+Command `antlr4` generates parser and visitor in `antlr_files` folder.
+These files can be imported and used in your own code.
 
 For example:
 ```
@@ -122,7 +142,3 @@ def main():
 if __name__ == "__main__":
     main()
 ```
-
-## Visualization of the syntax:
-
-![](./scheme/scheme.png)

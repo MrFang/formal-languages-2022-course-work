@@ -1,4 +1,4 @@
-// Example 3
+// Example 6
 AB : ((A | B) | C) | D
 BC : (A | "cats" | B) | ("cats"* | B?)*
 CD : (((A)))

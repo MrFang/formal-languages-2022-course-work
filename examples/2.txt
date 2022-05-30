@@ -1,0 +1,4 @@
+// Simple example 2
+S : A | B
+A : B?
+B : A*

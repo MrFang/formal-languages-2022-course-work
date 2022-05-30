@@ -2,14 +2,13 @@ import sys
 from antlr4 import InputStream, CommonTokenStream
 from antlr_files.AutomataLexer import AutomataLexer
 from antlr_files.AutomataParser import AutomataParser
-from antlr4.tree.Trees import Trees
 from src.ExprVisitor import ExprVisitor
 
 
 def main():
-    # Пробуем разобрать правильный автомат
-    with open(sys.argv[1], 'r') as correct_file:
-        data = correct_file.read()
+    # Read file
+    with open(sys.argv[1], 'r') as file:
+        data = file.read()
 
     data_stream = InputStream(data)
     # lexer
@@ -17,6 +16,7 @@ def main():
     stream = CommonTokenStream(lexer)
     # parser
     parser = AutomataParser(stream)
+    # Run parser
     tree = parser.s()
 
     visitor = ExprVisitor()

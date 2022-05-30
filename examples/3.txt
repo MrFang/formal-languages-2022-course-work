@@ -1,0 +1,4 @@
+// Simple example 3
+S : (A | B)?
+A : "a" | B
+B : "b" | A
