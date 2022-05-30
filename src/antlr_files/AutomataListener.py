@@ -26,21 +26,21 @@ class AutomataListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by AutomataParser#rule.
-    def enterRule(self, ctx:AutomataParser.RuleContext):
-        pass
-
-    # Exit a parse tree produced by AutomataParser#rule.
-    def exitRule(self, ctx:AutomataParser.RuleContext):
-        pass
-
-
     # Enter a parse tree produced by AutomataParser#comment.
     def enterComment(self, ctx:AutomataParser.CommentContext):
         pass
 
     # Exit a parse tree produced by AutomataParser#comment.
     def exitComment(self, ctx:AutomataParser.CommentContext):
+        pass
+
+
+    # Enter a parse tree produced by AutomataParser#rule.
+    def enterRule(self, ctx:AutomataParser.RuleContext):
+        pass
+
+    # Exit a parse tree produced by AutomataParser#rule.
+    def exitRule(self, ctx:AutomataParser.RuleContext):
         pass
 
 
@@ -80,15 +80,6 @@ class AutomataListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by AutomataParser#plus.
-    def enterPlus(self, ctx:AutomataParser.PlusContext):
-        pass
-
-    # Exit a parse tree produced by AutomataParser#plus.
-    def exitPlus(self, ctx:AutomataParser.PlusContext):
-        pass
-
-
     # Enter a parse tree produced by AutomataParser#star.
     def enterStar(self, ctx:AutomataParser.StarContext):
         pass
@@ -116,12 +107,12 @@ class AutomataListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by AutomataParser#symbol.
-    def enterSymbol(self, ctx:AutomataParser.SymbolContext):
+    # Enter a parse tree produced by AutomataParser#non_terminal_name.
+    def enterNon_terminal_name(self, ctx:AutomataParser.Non_terminal_nameContext):
         pass
 
-    # Exit a parse tree produced by AutomataParser#symbol.
-    def exitSymbol(self, ctx:AutomataParser.SymbolContext):
+    # Exit a parse tree produced by AutomataParser#non_terminal_name.
+    def exitNon_terminal_name(self, ctx:AutomataParser.Non_terminal_nameContext):
         pass
 
 

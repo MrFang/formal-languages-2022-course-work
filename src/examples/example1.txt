@@ -1,3 +1,4 @@
 S : AB? | (AB)*
-A : abc
-B : cba+
+A : "abc"
+B : " c "*
+E : "\"cats\""*
