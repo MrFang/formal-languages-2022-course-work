@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import List
+from typing import List, Optional
 import numpy as np
 from matplotlib.lines import Line2D
 from src.Graph import Graph
@@ -20,6 +20,29 @@ class Automata:
 
     def add_edge(self, from_state_id: int, to_state_id: int, label: str) -> bool:
         return self.__graph.add_edge(from_state_id, to_state_id, label)
+
+    @staticmethod
+    def concat_automatons(automatons: List[Automata]) -> Automata:
+        assert len(automatons) > 0
+
+        auto = Automata()
+        last_end_state: Optional[int] = None
+
+        for a in automatons:
+            for s in a.__graph.vertexes():
+                auto.add_state(s)
+            for k, v in a.__graph.edges().items():
+                auto.add_edge(k[0], k[1], v)
+
+            if last_end_state is not None:
+                auto.add_edge(last_end_state, a.begin_state, Automata.EPSILON_LABEL)
+
+            last_end_state = a.end_state
+
+        auto.begin_state = automatons[0].begin_state
+        auto.end_state = automatons[-1].end_state
+
+        return auto
 
     @staticmethod
     def merge_automatons(automatons: List[Automata], new_begin_state: int, new_end_state: int) -> Automata:
@@ -43,7 +66,12 @@ class Automata:
 
     def visualise(self):
         vertexes = self.__graph.vertexes()
-        edges = self.__graph.edges()
+        edges = {
+            k: v if v != Automata.EPSILON_LABEL else chr(949)
+            for k, v in self.__graph.edges().items()
+        }
+
+        plt.figure(figsize=(12, 12), dpi=100)
 
         g = nx.MultiDiGraph()
         g.add_nodes_from(vertexes)
@@ -81,8 +109,7 @@ class Automata:
                    markerfacecolor='magenta', markersize=13)
         ]
         plt.legend(handles=legend_elements)
-
-        plt.show()
+        plt.savefig(f'auto_{self.begin_state}.png', dpi=100)
 
     @staticmethod
     def __draw_labels(g, pos, edge_labels=None, label_pos=0.5, font_size=10, font_color="k",
