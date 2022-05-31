@@ -27,24 +27,29 @@ Where:
     <non-alternative expression> | <non-alternative expression> | ...
     ```
 
-2. Each `<non-alternative expression>` is a concatenation of `<operator expression>`'s
-and `<simple expression>`'s.
+2. Each `<non-alternative expression>` is a concatenation of `<parentheses expression>`'s,
+`<operator expression>`'s and `<simple expression>`'s.
 
     Example:
     ```
     <simple expression> <simple expression> <operator expression> ...
     ```
 
-3. `<simple expression>` correspond to `<non-terminal name>` or `<terminal expression>`
+3. `<parentheses expression>` is arbitrary expression in parentheses:
+    ```
+    (<expression>)
+    ```
 
-4. `<terminal expression>` is sequence of arbitrary ASCII symbols placed in double quotes.
+5. `<simple expression>` correspond to `<non-terminal name>` or `<terminal expression>`
+
+6. `<terminal expression>` is sequence of arbitrary ASCII symbols placed in double quotes.
 
     Example:
     ```
     S : "some string"
     ```
 
-5. `<operator expression>` correspond to either star (`*`) or maybe (`?`) operators.
+7. `<operator expression>` correspond to either star (`*`) or maybe (`?`) operators.
 
     These operators act on the left and can be applied to:
 
