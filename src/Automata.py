@@ -72,7 +72,7 @@ class Automata:
             for k, v in self.__graph.edges().items()
         }
 
-        plt.figure(figsize=(12, 12), dpi=100)
+        plt.figure(figsize=(25, 25), dpi=500)
 
         g = nx.MultiDiGraph()
         g.add_nodes_from(vertexes)
