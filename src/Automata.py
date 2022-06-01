@@ -72,12 +72,12 @@ class Automata:
             for k, v in self.__graph.edges().items()
         }
 
-        plt.figure(figsize=(25, 25), dpi=500)
+        plt.figure(figsize=(20, 20), dpi=500)
 
         g = nx.MultiDiGraph()
         g.add_nodes_from(vertexes)
         g.add_edges_from(edges.keys())
-        position = nx.planar_layout(g)
+        position = nx.spring_layout(g)
         begin_state_idx, end_state_idx = \
             (vertexes.index(self.begin_state), vertexes.index(self.end_state))
 
@@ -119,7 +119,7 @@ class Automata:
             os.makedirs(os.path.dirname(name))
 
         # Save figure
-        plt.savefig(name, dpi=100)
+        plt.savefig(name, dpi=500)
 
     @staticmethod
     def __draw_labels(g, pos, edge_labels=None, label_pos=0.5, font_size=10, font_color="k",
