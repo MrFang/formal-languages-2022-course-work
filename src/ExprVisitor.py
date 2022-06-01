@@ -1,5 +1,4 @@
-from typing import List
-
+from typing import List, Tuple
 from src.Automata import Automata
 from src.IdGenerator import IdGenerator
 from src.antlr_files.AutomataParser import AutomataParser
@@ -13,6 +12,13 @@ class ExprVisitor(AutomataVisitor):
 
     def defaultResult(self) -> List[Automata]:
         return []
+
+    def visitNon_terminal_name(self, ctx: AutomataParser.Non_terminal_nameContext):
+        return ctx.getText()
+
+    def visitRule(self, ctx: AutomataParser.RuleContext) -> Tuple[str, Automata]:
+        res = self.visitChildren(ctx)
+        return res[0], res[1]
 
     def aggregateResult(self, aggregate, next_result) -> List[Automata]:
         if isinstance(next_result, list):

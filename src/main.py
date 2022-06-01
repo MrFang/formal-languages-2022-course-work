@@ -21,8 +21,8 @@ def main():
 
     visitor = ExprVisitor()
     automatons = visitor.visit(tree)
-    for a in automatons:
-        a.visualise()
+    for s, a in automatons:
+        a.visualise(f'results/{s}.png')
 
 
 if __name__ == "__main__":

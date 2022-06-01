@@ -65,7 +65,7 @@ class Automata:
 
         return new_automata
 
-    def visualise(self, folder="results"):
+    def visualise(self, name: str) -> None:
         vertexes = self.__graph.vertexes()
         edges = {
             k: v if v != Automata.EPSILON_LABEL else chr(949)
@@ -115,11 +115,11 @@ class Automata:
         plt.legend(handles=legend_elements)
 
         # Create a new directory, if it doesn't exist
-        if not os.path.exists(folder):
-            os.makedirs(folder)
+        if not os.path.exists(os.path.dirname(name)):
+            os.makedirs(os.path.dirname(name))
 
         # Save figure
-        plt.savefig(os.path.join(folder, f'auto_{self.begin_state}.png'), dpi=100)
+        plt.savefig(name, dpi=100)
 
     @staticmethod
     def __draw_labels(g, pos, edge_labels=None, label_pos=0.5, font_size=10, font_color="k",
